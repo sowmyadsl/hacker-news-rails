@@ -1,18 +1,21 @@
 class PostsController < ApplicationController
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
+
   def index
     @posts = Post.all
   end
 
   def show
-    @post = Post.find(params[:id])
+    # @post = Post.find(params[:id])
   end
 
   def new
-    @post = Post.new
+    @post = current_user.posts.build
   end
 
   def create
-    @post = Post.new(post_params)
+    @post = current_user.posts.build(post_params)
     if @post.save
     flash[:notice] = "Post successfully added!"
       redirect_to  posts_path
@@ -22,11 +25,9 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
   end
 
   def update
-    @post= Post.find(params[:id])
     if @post.update(post_params)
       flash[:notice] = "Post successfully updated!"
       redirect_to posts_path
@@ -36,15 +37,20 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:id])
     if @post.destroy
       flash[:notice] = "Post successfully removed!"
       redirect_to posts_path
     end
   end
 
+
 private
-  def post_params
-    params.require(:post).permit(:title, :url)
-  end
+    # Use callbacks to share common setup or constraints between actions.
+    def set_post
+      @post = Post.find(params[:id])
+    end
+
+    def post_params
+      params.require(:post).permit(:title, :url)
+    end
 end
