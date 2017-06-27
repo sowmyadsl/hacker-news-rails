@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+
+
+development:
+  <<: *default
+  database: hacker-news_development
+
+test:
+  <<: *default
+  database: hacker-news_test
+
+production:
+  <<: *default
+  database: hacker-news_production
+  username: hacker-news
+  password: <%= ENV['HACKER-NEWS_DATABASE_PASSWORD'] %>
