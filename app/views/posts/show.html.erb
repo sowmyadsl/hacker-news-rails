@@ -1,5 +1,19 @@
 <h1>Show Post</h1>
 
+<%= @post.title %> <br>
+<a href="<%= @post.url %>
+"><%= @post.url %>
+</a>
+
+<h3>Comments </h3>
+<% @post.comments.each do |comment| %>
+  <div class="well">
+    <%= comment.comment %>
+  </div>
+<% end %>
+
+<%= render partial: "comments/form", locals: {commentable: @post} %>
+
 <p><%= link_to "Edit", edit_post_path(@post) %></p>
 <p><%= link_to "Delete", post_path(@post),
                          :data => {:confirm => "You sure?",
