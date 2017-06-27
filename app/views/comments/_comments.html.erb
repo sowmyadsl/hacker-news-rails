@@ -1,0 +1,7 @@
+<div class="well">
+  <%= commentable.comment %>
+  <% commentable.comments.each do |comment| %>
+    <%= render partial: "comments/comments", locals: {commentable: comment} %>
+  <% end %>
+  <%= render partial: "comments/form", locals: {commentable: commentable} %>
+</div>

@@ -3,9 +3,11 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :posts do
-    resources :comments
+    resources :comments, module: :posts
   end
 
-  resources :comments
+  resources :comments do
+    resources :comments, module: :comments
+  end
 
 end

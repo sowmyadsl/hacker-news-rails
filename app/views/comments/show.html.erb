@@ -1,7 +1,0 @@
-<h1>Show Comment</h1>
-
-<p><%= link_to "Edit", edit_comment_path(@comment) %></p>
-<p><%= link_to "Delete", comment_path(@comment),
-                         :data => {:confirm => "You sure?",
-                                   :method => "delete"} %></p>
-<p><%= link_to "Return to comments", comments_path %></p>
