@@ -1,11 +1,8 @@
-<h1>Posts</h1>
-
-<ul>
-  <% @posts.each do |post| %>
-    <li><%= link_to post.title, post_path(post) %></li>
-  <% end %>
-</ul>
-
-<hr>
-
-<%= link_to "New Post", new_post_path %>
+<% @posts.each do |post| %>
+<div class="link row clearfix">
+  <h2>
+    <%= link_to post.title, post_path(post) %> <br>
+    <small class="author">Submitted <%= time_ago_in_words(post.created_at) %> by <%= post.user.email %></small>
+  </h2>
+</div>
+<% end %>

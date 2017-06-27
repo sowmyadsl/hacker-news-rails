@@ -1,7 +1,10 @@
-<div class="well">
-  <%= commentable.comment %>
-  <% commentable.comments.each do |comment| %>
-    <%= render partial: "comments/comments", locals: {commentable: comment} %>
-  <% end %>
-  <%= render partial: "comments/form", locals: {commentable: commentable} %>
+<div class="panel panel-info">
+  <div class="panel-heading"><%= commentable.comment %></div>
+  <div class="panel-body">
+    <small class="author">Submitted <%= time_ago_in_words(commentable.created_at) %></small>
+    <% commentable.comments.each do |comment| %>
+      <%= render partial: "comments/comments", locals: {commentable: comment} %>
+    <% end %>
+    <%= render partial: "comments/form", locals: {commentable: commentable} %>
+  </div>
 </div>

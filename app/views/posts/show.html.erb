@@ -1,19 +1,28 @@
-<h1>Show Post</h1>
+<h1><%= @post.title %></h1>
 
-<%= @post.title %> <br>
-<a href="<%= @post.url %>
-"><%= @post.url %>
-</a>
+<div class="link row clearfix">
+  <h2>
+    <a href="<%= @post.url %>
+    "><%= @post.url %>
+    </a> <br>
+    <small class="author">Submitted <%= time_ago_in_words(@post.created_at) %> by <%= @post.user.email %></small>
+  </h2>
 
-<h3>Comments </h3>
-<% @post.comments.each do |comment| %>
-  <%= render partial: "comments/comments", locals: {commentable: comment} %>
-<% end %>
+</div>
 
-<%= render partial: "comments/form", locals: {commentable: @post, post: @post} %>
+<div class="link row clearfix">
+  <h3>Comments </h3>
 
-<p><%= link_to "Edit", edit_post_path(@post) %></p>
-<p><%= link_to "Delete", post_path(@post),
+  <% @post.comments.each do |comment| %>
+    <%= render partial: "comments/comments", locals: {commentable: comment} %>
+  <% end %>
+
+  <%= render partial: "comments/form", locals: {commentable: @post, post: @post} %>
+
+</div>
+
+<button class="btn btn-default"><%= link_to "Edit", edit_post_path(@post) %></button>
+<button class="btn btn-default"><%= link_to "Delete", post_path(@post),
                          :data => {:confirm => "You sure?",
-                                   :method => "delete"} %></p>
-<p><%= link_to "Return to posts", posts_path %></p>
+                                   :method => "delete"} %></button>
+<button class="btn btn-default"><%= link_to "Return to posts", posts_path %></button>
